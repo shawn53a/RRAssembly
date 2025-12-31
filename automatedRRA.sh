@@ -10,6 +10,8 @@
 #   Semblans
 #   Home
 
+set -a
+
 usage() { echo -e "\n$0 \n\n[-r] amount of ram <number> \n[-t] number of threads <number> \n[-a] <tsv with SRR accesions> \n[-k] <path to Kraken DBs> \n[-s] <path to Semblans> \n[-p] <path to reference proteome> \n[-b] <path of working directory>" >&2; }
 
 while getopts ":hr:t:a:p:k:s:b:" OPTION; do
@@ -21,7 +23,7 @@ while getopts ":hr:t:a:p:k:s:b:" OPTION; do
                         threads=${OPTARG}
                         ;;
                 a)
-                        SRR=${OPTARG}
+                        SRRs=${OPTARG}
                         ;;
 
                 p)      refPro=${OPTARG}
@@ -53,12 +55,25 @@ while getopts ":hr:t:a:p:k:s:b:" OPTION; do
         esac
 done    
 
-if [ -z "${ram}" ] || [ -z "${threads}" ] || [ -z "${SRR}" ] || [ -z "${refPro}" ] || [ -z "${KdbPATH}" ] || [ -z "${SPATH}" ] || [ -z "${HPATH}" ] ];then
+if [ -z "${ram}" ] || [ -z "${threads}" ] || [ -z "${SRRs}" ] || [ -z "${refPro}" ] || [ -z "${KdbPATH}" ] || [ -z "${SPATH}" ] || [ -z "${HPATH}" ];then
         usage
         exit 1
 fi
 
-echo $ram
-echo $threads
+while IFS= read -r line
+do
+        code="${line%%	*}"
+	SRR="${line##*	}"
+
+        echo "SRR to download: ${SRR} " | tee -a "${HPATH}"/"${code}"/"${code}".log
+	echo "4 Letter Code: ${code} " | tee -a "${HPATH}"/"${code}"/"${code}".log
+
+        ./preprocess.sh
+
+        ./kraken.sh
+
+        ./assembly
+
+done < $SRRs
 
 
