@@ -72,7 +72,7 @@ do
 
         #"${SCRIPT_DIR}/preprocess.sh"
 
-        "${SCRIPT_DIR}/kraken.sh"
+        #"${SCRIPT_DIR}/kraken.sh"
 
         "${SCRIPT_DIR}/assembly.sh"
 
