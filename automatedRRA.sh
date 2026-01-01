@@ -9,7 +9,7 @@
 #   kraken DBs
 #   Semblans
 #   Home
-
+echo "hellow"
 set -a
 
 usage() { echo -e "\n$0 \n\n[-r] amount of ram <number> \n[-t] number of threads <number> \n[-a] <tsv with SRR accesions> \n[-k] <path to Kraken DBs> \n[-s] <path to Semblans> \n[-p] <path to reference proteome> \n[-b] <path of working directory>" >&2; }
@@ -60,19 +60,21 @@ if [ -z "${ram}" ] || [ -z "${threads}" ] || [ -z "${SRRs}" ] || [ -z "${refPro}
         exit 1
 fi
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 while IFS= read -r line
 do
         code="${line%%	*}"
 	SRR="${line##*	}"
 
-        echo "SRR to download: ${SRR} " | tee -a "${HPATH}"/"${code}"/"${code}".log
-	echo "4 Letter Code: ${code} " | tee -a "${HPATH}"/"${code}"/"${code}".log
+        echo "SRR to download: ${SRR} " | tee -a "${HPATH}/${code}/${code}.log"
+	echo "4 Letter Code: ${code} " | tee -a "${HPATH}/${code}/${code}.log"
 
-        ./preprocess.sh
+        #"${SCRIPT_DIR}/preprocess.sh"
 
-        ./kraken.sh
+        "${SCRIPT_DIR}/kraken.sh"
 
-        ./assembly
+        "${SCRIPT_DIR}/assembly.sh"
 
 done < $SRRs
 
