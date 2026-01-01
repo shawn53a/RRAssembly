@@ -7,7 +7,7 @@ This is a personal script that I use to download raw reads from the SRA and asse
 There are three main steps:
 1. Download and preprocess reads
     * Reads are preprocessed using the Semblans preprocess tool
-    * Reads are run through Rcorrector and Trimmomatic 
+       * Reads are run through Rcorrector and Trimmomatic 
 2. Separate contamination, chloroplast, mitochondrial, and nuclear reads
     * Preprocessed reads are run through kraken several times
         * First, bacterial reads are filtered out using the STD_PF database
