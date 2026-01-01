@@ -1,7 +1,7 @@
 # RRAssembly
 Shawn Arreguin
 
-##What this does:
+## What this does:
 This is a personal script that I use to download raw reads from the SRA and assemble them.
 
 There are three main steps:
