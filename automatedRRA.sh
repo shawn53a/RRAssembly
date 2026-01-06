@@ -67,12 +67,12 @@ do
         code="${line%%	*}"
 	SRR="${line##*	}"
 
-        echo "SRR to download: ${SRR} " | tee -a "${HPATH}/${code}/${code}.log"
-	echo "4 Letter Code: ${code} " | tee -a "${HPATH}/${code}/${code}.log"
+        echo "SRR to download: ${SRR}" 
+	echo "4 Letter Code: ${code}" 
 
-        #"${SCRIPT_DIR}/preprocess.sh"
+        "${SCRIPT_DIR}/preprocess.sh"
 
-        #"${SCRIPT_DIR}/kraken.sh"
+        "${SCRIPT_DIR}/kraken.sh"
 
         "${SCRIPT_DIR}/assembly.sh"
 
