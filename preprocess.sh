@@ -1,8 +1,13 @@
 #Shawn Arreguin - 12/31/25
 #Downloads SRR and preprocesses it 
 
-#download SRR
 mkdir "${HPATH}/${code}"
+
+#echo some stuff
+echo "SRR to download: ${SRR} " | tee -a "${HPATH}/${code}/${code}.log"
+echo "4 Letter Code: ${code} " | tee -a "${HPATH}/${code}/${code}.log"
+
+#download SRR
 echo "fasterq-dump "$SRR" -O "${HPATH}/${code}" -e "$threads"" | tee -a "${HPATH}/${code}/${code}.log"
 fasterq-dump "$SRR" -O "${HPATH}/${code}" -e "$threads"
 
@@ -13,5 +18,6 @@ mkdir "${HPATH}/${code}"/preprocess
 
 
 #delete (compress for now)  raw reads
-pigz -p "$threads" "${HPATH}/${code}"/*.fastq* | tee -a "${HPATH}/${code}/${code}.log"
+echo "rm *.fastq" | tee -a "${HPATH}/${code}/${code}.log"
+rm *.fastq
 rm -r "${HPATH}/${code}"/preprocess/preprocess/04* "${HPATH}/${code}"/preprocess/preprocess/05* "${HPATH}/${code}"/preprocess/preprocess/06* "${HPATH}/${code}"/preprocess/preprocess/02*
