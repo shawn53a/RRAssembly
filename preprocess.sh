@@ -1,12 +1,13 @@
 #Shawn Arreguin - 12/31/25
 #Downloads SRR and preprocesses it 
 
+mkdir "${HPATH}/${code}"
+
 #echo some stuff
 echo "SRR to download: ${SRR} " | tee -a "${HPATH}/${code}/${code}.log"
 echo "4 Letter Code: ${code} " | tee -a "${HPATH}/${code}/${code}.log"
 
 #download SRR
-mkdir "${HPATH}/${code}"
 echo "fasterq-dump "$SRR" -O "${HPATH}/${code}" -e "$threads"" | tee -a "${HPATH}/${code}/${code}.log"
 fasterq-dump "$SRR" -O "${HPATH}/${code}" -e "$threads"
 
