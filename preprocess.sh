@@ -19,5 +19,5 @@ mkdir "${HPATH}/${code}"/preprocess
 
 #delete (compress for now)  raw reads
 echo "rm *.fastq" | tee -a "${HPATH}/${code}/${code}.log"
-rm *.fastq
+rm "${HPATH}/${code}"/*.fastq
 rm -r "${HPATH}/${code}"/preprocess/preprocess/04* "${HPATH}/${code}"/preprocess/preprocess/05* "${HPATH}/${code}"/preprocess/preprocess/06* "${HPATH}/${code}"/preprocess/preprocess/02*
