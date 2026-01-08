@@ -25,6 +25,6 @@ pigz -v -p "$threads" "${HPATH}/${code}"/DetectChloro.txt | tee -a "${HPATH}/${c
 pigz -v -p "$threads" "${HPATH}/${code}"/DetectMito.txt | tee -a "${HPATH}/${code}/${code}.log"
 
 #rm intermediate
-echo "rm bacterial_* intermediate_* not_bacteria_*" | tee -a "${HPATH}/${code}/${code}.log"
-rm bacterial_* intermediate_* not_bacteria_*
+echo "rm "${HPATH}/${code}"/bacterial_* "${HPATH}/${code}"/intermediate_* "${HPATH}/${code}"/not_bacteria_*" | tee -a "${HPATH}/${code}/${code}.log"
+rm "${HPATH}/${code}"/bacterial_* "${HPATH}/${code}"/intermediate_* "${HPATH}/${code}"/not_bacteria_*
 
