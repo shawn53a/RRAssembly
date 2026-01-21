@@ -8,8 +8,8 @@ echo "SRR to download: ${SRR} " | tee -a "${HPATH}/${code}/${code}.log"
 echo "4 Letter Code: ${code} " | tee -a "${HPATH}/${code}/${code}.log"
 
 #download SRR
-echo "fasterq-dump "$SRR" -O "${HPATH}/${code}" -e "$threads"" | tee -a "${HPATH}/${code}/${code}.log"
-fasterq-dump "$SRR" -O "${HPATH}/${code}" -e "$threads"
+echo ""$SPATH"/external/sratoolkit/bin/fasterq-dump "$SRR" -O "${HPATH}/${code}" -e "$threads"" | tee -a "${HPATH}/${code}/${code}.log"
+"$SPATH"/external/sratoolkit/bin/fasterq-dump "$SRR" -O "${HPATH}/${code}" -e "$threads"
 
 
 #preprocess raw reads
