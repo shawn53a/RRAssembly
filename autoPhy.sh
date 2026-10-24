@@ -16,9 +16,9 @@ YaP=~/analysis/yayang
 
 faCount=$(ls *.fa | wc -l)
 
-z=$(pwd)
 
-dirCount=$(echo $z | sed -r 's/.*fastaMCL([0-9]{1,3}).*/\1/')
+
+
 
 
 
@@ -26,6 +26,8 @@ while [ $faCount -gt 0 ]; do
 
 
 		curDir=$(pwd)
+
+		dirCount=$(echo "$curDir" | sed -r 's/.*fastaMCL([0-9]{1,3}).*/\1/')
 
 		touch "$curDir"/auto_log.txt
 
@@ -68,11 +70,11 @@ while [ $faCount -gt 0 ]; do
 
 		#Ya Yang Scripts
 		echo "Ya Scripts" | tee -a "$curDir"/auto_log.txt
-		conda run -n 2.7 "$YaP"/trim_tips.py . .treefile 0.2 0.3 | tee -a "$curDir"/auto_log.txt
-		conda run -n 2.7 "$YaP"/mask_tips_by_taxonID_transcripts.py . . n | tee -a "$curDir"/auto_log.txt
+		conda run -n 2.7 python "$YaP"/trim_tips.py . .treefile 0.2 0.3 | tee -a "$curDir"/auto_log.txt
+		conda run -n 2.7 python "$YaP"/mask_tips_by_taxonID_transcripts.py . . n | tee -a "$curDir"/auto_log.txt
 
 		mkdir ./subtrees
-		conda run -n 2.7 "$YaP"/cut_long_internal_branches.py . .mm 0.5 4 ./subtrees/ | tee -a "$curDir"/auto_log.txt
+		conda run -n 2.7 python "$YaP"/cut_long_internal_branches.py . .mm 0.5 4 ./subtrees/ | tee -a "$curDir"/auto_log.txt
 
 		mkdir ./finalTrees
 		c=0
@@ -84,7 +86,7 @@ while [ $faCount -gt 0 ]; do
 		mkdir ../fastaMCL"$dirCount"
 		cd ./subtrees
 		pwd | tee -a "$curDir"/auto_log.txt
-		conda run -n 2.7 "$YaP" python ~/analysis/yayang/write_fasta_files_from_trees.py ../../total.fa . .subtree ../../fastaMCL"$dirCount" | tee -a "$curDir"/auto_log.txt
+		conda run -n 2.7 python "$YaP"/write_fasta_files_from_trees.py ../../total.fa . .subtree ../../fastaMCL"$dirCount" | tee -a "$curDir"/auto_log.txt
 
 		#move to new iteration and check fasta count
 		cd ../../fastaMCL"$dirCount"
@@ -96,18 +98,3 @@ while [ $faCount -gt 0 ]; do
 done
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-conda run -n 2.7 
