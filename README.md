@@ -4,6 +4,13 @@ Shawn Arreguin
 ## What this does:
 This is a personal script that I use to download raw reads from the SRA and assemble them.
 
+NEW: 
+    * I added a shell script, autoPhy.sh, that automatically runs tree trimming steps until trees no longer change after cleaning. 
+CAUTION:
+    * This can take many many rounds!
+    * More rounds = WAY more time
+    * This is still undergoing testing, use cautiously!
+
 There are three main steps:
 1. Download and preprocess reads
     * Reads are preprocessed using the Semblans preprocess tool
