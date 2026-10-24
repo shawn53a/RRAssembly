@@ -6,6 +6,7 @@ This is a personal script that I use to download raw reads from the SRA and asse
 
 NEW: 
 * I added a shell script, autoPhy.sh, that automatically runs tree trimming steps until trees no longer change after cleaning. 
+
 CAUTION:
 * This can take many many rounds!
 * More rounds = WAY more time
